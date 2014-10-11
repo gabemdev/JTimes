@@ -11,4 +11,29 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <QuartzCore/QuartzCore.h>
+    #import "JTUIService.h"
+    #import "JTDataService.h"
+    #import "JTAnalytics.h"
+    #import "UIView+JT.h"
+    #import "UIViewController+JT.h"
+    #import "JT.h"
+    #import "Reachability.h"
+    #import "LocalyticsSession.h"
+    #import "LocalyticsUtilities.h"
+    #import "JTAppDelegate.h"
+    #import <Crashlytics/Crashlytics.h>
+    #import "JTDefines.h"
+    #import "MessageUI/MFMailComposeViewController.h"
+    #import <Accounts/Accounts.h>
+    #import <Social/Social.h>
+
+#endif
+
+#define BB_API_DEVELOPMENT_MODE
+//#define BB_PRODUCTION_MODE   YES
+
+#if !TARGET_IPHONE_SIMULATOR
+//#define BB_PRODUCTION_MODE
+#define BB_CRASHLYTICS_KEY @""
 #endif

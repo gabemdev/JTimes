@@ -7,40 +7,138 @@
 //
 
 #import "JTAppDelegate.h"
+#import <Crashlytics/Crashlytics.h>
+
+@interface JTAppDelegate ()
+
+
+@end
+
 
 @implementation JTAppDelegate
+@synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self _loadSharedInstances];
+    
+    
+    
+    
+    // Optionally enable development mode
+#ifdef BB_API_DEVELOPMENT_MODE
+    //[BBHTTPClient setDevelopmentModeEnabled:NO];
+	//[BBPushController setDevelopmentModeEnabled:NO];
+    //[TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
+    
+    // Defer some stuff to make launching faster
+	dispatch_async(dispatch_get_main_queue(), ^{
+		
+        
+        
+	});
+    
+    [_window makeKeyAndVisible];
     return YES;
+}
+
+- (void)_loadSharedInstances{
+    
+    [JTDataService sharedInstance];
+    [JTUIService sharedInstance];
+    [JTAnalytics sharedInstance];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[LocalyticsSession shared] close];
+    [[LocalyticsSession shared] upload];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didEnterBackground" object:self];
+    
+    UIApplication*    app = [UIApplication sharedApplication];
+    
+    // Request permission to run in the background. Provide an
+    // expiration handler in case the task runs long.
+    NSAssert(bgTask == UIBackgroundTaskInvalid, nil);
+    
+    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        // Synchronize the cleanup call on the main thread in case
+        // the task actually finishes at around the same time.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (bgTask != UIBackgroundTaskInvalid)
+            {
+                [app endBackgroundTask:bgTask];
+                bgTask = UIBackgroundTaskInvalid;
+            }
+        });
+    }];
+    
+    // Start the long-running task and return immediately.
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSLog(@"App status: applicationDidEnterBackground");
+        // Synchronize the cleanup call on the main thread in case
+        // the expiration handler is fired at the same time.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (bgTask != UIBackgroundTaskInvalid)
+            {
+                [app endBackgroundTask:bgTask];
+                bgTask = UIBackgroundTaskInvalid;
+            }
+        });
+    });
+    NSLog(@"backgroundTimeRemaining: %f", [[UIApplication sharedApplication] backgroundTimeRemaining]);
+    
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
+}
+
+#pragma mark - UIAlertViewDelegate methods
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // Quit the app
+    exit(1);
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		return YES;
+	}
+	
+	return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskAll;
+}
+
+-(BOOL)shouldAutorotate{
+    return YES;
 }
 
 @end

@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Jewish Times
+
+  Created by Rockstar. on 8/9/13.
+  Copyright (c) 2013 Bnei Baruch USA. All rights reserved.
+*/
+
+"PRIVACY_WEB" = "http://m.kab.tv/ios/TorahPortion/Privacy.html";
+"TERMS_WEB" = "http://m.kab.tv/ios/TorahPortion/Terms.html";
+"NSDATE" = "E, d LLL yyyy HH:mm:ss zzz";
+"TWITTER" = "Twitter";
+"EMAIL" = "Email";
+"FACEBOOK" = "Facebook";
+"SAFARI" = "Open in Safari";
+"NEWS" = "http://feeds.feedburner.com/laitmancomcrisis";

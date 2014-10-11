@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JTAppDelegate : UIResponder <UIApplicationDelegate>
+@interface JTAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, UITabBarDelegate, UIActionSheetDelegate>
+{
+    
+    UIBackgroundTaskIdentifier bgTask; 
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
