@@ -65,13 +65,13 @@
     
     
     //Play Video Button
-    UIImage *btn = [UIImage imageNamed:@"btn_standard_default~ipad.png"];
+    UIImage *btn = [UIImage imageNamed:@"btn_standard_default"];
     UIImage *stretchBtn = [btn stretchableImageWithLeftCapWidth:5.0 topCapHeight:0.0];
     UIImageView *btnImageView = [[UIImageView alloc]initWithImage:stretchBtn];
     btnImageView.frame = CGRectMake(28, 402, 265.0, stretchBtn.size.height);
     [viewButton setBackgroundImage:stretchBtn forState:UIControlStateNormal];
     
-    UIImage *btnPressed = [UIImage imageNamed:@"btn_standard_pressed~ipad.png"];
+    UIImage *btnPressed = [UIImage imageNamed:@"btn_standard_pressed"];
     UIImage *stretchBtnPressed = [btnPressed stretchableImageWithLeftCapWidth:5.0 topCapHeight:0.0];
     UIImageView *btnPressedImageView = [[UIImageView alloc]initWithImage:stretchBtnPressed];
     btnPressedImageView.frame = CGRectMake(28, 402, 265.0, stretchBtnPressed.size.height);

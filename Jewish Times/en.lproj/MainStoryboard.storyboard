@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A386a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fSY-xR-LfY">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -479,12 +480,18 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-iO-eHa">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-iO-eHa">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="bv1-iO-eHa" secondAttribute="trailing" constant="-16" id="28k-AM-eBe"/>
+                            <constraint firstItem="ZCs-7Q-yZJ" firstAttribute="top" secondItem="bv1-iO-eHa" secondAttribute="bottom" id="iPp-nL-JEN"/>
+                            <constraint firstItem="bv1-iO-eHa" firstAttribute="top" secondItem="VgM-50-Q8M" secondAttribute="bottom" id="wtG-dk-1sB"/>
+                            <constraint firstItem="bv1-iO-eHa" firstAttribute="leading" secondItem="KJZ-eo-uep" secondAttribute="leadingMargin" constant="-16" id="y08-qp-fkj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="THj-RA-cAW"/>
                     <nil key="simulatedBottomBarMetrics"/>
