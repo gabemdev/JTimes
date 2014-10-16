@@ -125,7 +125,32 @@
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
         activityVC.excludedActivityTypes = [[NSArray alloc] initWithObjects: UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, nil];
         
-        UIActivityViewControllerCompletionHandler completionBlock = ^(NSString *activityType, BOOL completed) {
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+            __strong UIActivityViewControllerCompletionWithItemsHandler completionBlock = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+                if (completed) {
+                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check.png"]];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"Done!";
+                    
+                    [hud show:YES];
+                    [hud hide:YES afterDelay:1];
+                } else{
+                    
+                    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error-bubble.png"]];
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.labelText = @"Oops! Something went wrong!";
+                    
+                    [hud show:YES];
+                    [hud hide:YES afterDelay:1];
+                }
+                
+            };
+            activityVC.completionWithItemsHandler = completionBlock;
+        }
+        else {
+        __strong UIActivityViewControllerCompletionHandler completionBlock = ^(NSString *activityType, BOOL completed) {
             if (completed) {
                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check.png"]];
@@ -147,6 +172,7 @@
             
         };
         activityVC.completionHandler = completionBlock;
+        }
         
         [self presentViewController:activityVC animated:YES completion:nil];
         

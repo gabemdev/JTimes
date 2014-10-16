@@ -103,7 +103,6 @@
 		6DEE7B3117B31589003C09CE /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2C17B31589003C09CE /* arrow.png */; };
 		6DEE7B3217B31589003C09CE /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2D17B31589003C09CE /* arrow@2x.png */; };
 		6DEE7B3317B31589003C09CE /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2F17B31589003C09CE /* PullToRefreshView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6DEE7B3417B31589003C09CE /* README in Resources */ = {isa = PBXBuildFile; fileRef = 6DEE7B3017B31589003C09CE /* README */; };
 		6DEE7B3717B31ABD003C09CE /* JTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B3617B31ABD003C09CE /* JTCell.m */; };
 		6DEE7B3E17B32789003C09CE /* JTNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B3D17B32789003C09CE /* JTNewsDetailViewController.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -267,7 +266,6 @@
 		6DEE7B2D17B31589003C09CE /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		6DEE7B2E17B31589003C09CE /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
 		6DEE7B2F17B31589003C09CE /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
-		6DEE7B3017B31589003C09CE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		6DEE7B3517B31ABD003C09CE /* JTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCell.h; sourceTree = "<group>"; };
 		6DEE7B3617B31ABD003C09CE /* JTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCell.m; sourceTree = "<group>"; };
 		6DEE7B3C17B32789003C09CE /* JTNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTNewsDetailViewController.h; sourceTree = "<group>"; };
@@ -721,7 +719,6 @@
 				6DEE7B2D17B31589003C09CE /* arrow@2x.png */,
 				6DEE7B2E17B31589003C09CE /* PullToRefreshView.h */,
 				6DEE7B2F17B31589003C09CE /* PullToRefreshView.m */,
-				6DEE7B3017B31589003C09CE /* README */,
 			);
 			name = PullToRefresh;
 			sourceTree = "<group>";
@@ -796,7 +793,6 @@
 				6D980B2117B167D20036368E /* iTunesArtwork in Resources */,
 				6DEE7B3117B31589003C09CE /* arrow.png in Resources */,
 				6DEE7B3217B31589003C09CE /* arrow@2x.png in Resources */,
-				6DEE7B3417B31589003C09CE /* README in Resources */,
 				6D556E2517B4CBDD00594DA0 /* Localizable.strings in Resources */,
 				6DE07D6317B847E80022501E /* Settings.bundle in Resources */,
 				6DE79A9017C5C8CD0029EF17 /* drawerIcon.png in Resources */,
@@ -944,7 +940,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -968,7 +964,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -979,6 +975,7 @@
 		6DEAE8DD17AF294E007E7D0F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -990,11 +987,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jewish Times/Jewish Times-Prefix.pch";
 				INFOPLIST_FILE = "Jewish Times/Jewish Times-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/gabrielmorales/BBProjects/Jewish\\ Times",
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1006,6 +1002,7 @@
 		6DEAE8DE17AF294E007E7D0F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1017,11 +1014,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jewish Times/Jewish Times-Prefix.pch";
 				INFOPLIST_FILE = "Jewish Times/Jewish Times-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/gabrielmorales/BBProjects/Jewish\\ Times",
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -289,6 +289,21 @@
             
             [tweetSheet addURL:[NSURL URLWithString:url]];
             [self presentViewController:tweetSheet animated:YES completion:nil];
+            
+            tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
+                switch (result) {
+                    case SLComposeViewControllerResultCancelled:
+                        break;
+                        case SLComposeViewControllerResultDone:
+                        break;
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        NSLog(@"Tweetsheet dismissed");
+                    }];
+                });
+            };
         }
         
     }
@@ -318,7 +333,7 @@
                 //  dismiss the Tweet Sheet
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self dismissViewControllerAnimated:NO completion:^{
-                        NSLog(@"Tweet Sheet has been dismissed.");
+                        NSLog(@"FB has been dismissed.");
                     }];
                 });
             };
