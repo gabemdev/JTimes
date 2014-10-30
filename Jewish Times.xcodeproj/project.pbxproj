@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D133CD91A01EC6E00BD0FAB /* GMDPTRDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D133CD41A01EC6E00BD0FAB /* GMDPTRDefault.m */; };
+		6D133CDA1A01EC6E00BD0FAB /* GMDPTRSimple.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D133CD61A01EC6E00BD0FAB /* GMDPTRSimple.m */; };
+		6D133CDB1A01EC6E00BD0FAB /* GMDPTRView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D133CD81A01EC6E00BD0FAB /* GMDPTRView.m */; };
 		6D4391EE19E8D87400D5B6AC /* libLocalyticsAMP_x64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4391EA19E8D87400D5B6AC /* libLocalyticsAMP_x64.a */; };
 		6D4391EF19E8D87400D5B6AC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6D4391EB19E8D87400D5B6AC /* LICENSE */; };
 		6D4391F219E8DFBD00D5B6AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D4391F119E8DFBD00D5B6AC /* Images.xcassets */; };
@@ -57,7 +60,7 @@
 		6D980B2017B167D20036368E /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 6D980B1E17B167D20036368E /* iTunesArtwork@2x */; };
 		6D980B2117B167D20036368E /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D980B1F17B167D20036368E /* iTunesArtwork */; };
 		6DE07D6317B847E80022501E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DE07D6217B847E80022501E /* Settings.bundle */; };
-		6DE79A8617C5835B0029EF17 /* JTBlogDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE79A8517C5835B0029EF17 /* JTBlogDetailViewController.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6DE79A8617C5835B0029EF17 /* JTBlogDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE79A8517C5835B0029EF17 /* JTBlogDetailViewController.m */; };
 		6DE79A8C17C5C8A70029EF17 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE79A8917C5C8A70029EF17 /* UIViewController+JASidePanel.m */; };
 		6DE79A8D17C5C8A70029EF17 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE79A8B17C5C8A70029EF17 /* JASidePanelController.m */; };
 		6DE79A9017C5C8CD0029EF17 /* drawerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DE79A8E17C5C8CD0029EF17 /* drawerIcon.png */; };
@@ -100,14 +103,18 @@
 		6DEE7B2517B31485003C09CE /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B1B17B31484003C09CE /* AFXMLRequestOperation.m */; };
 		6DEE7B2617B31485003C09CE /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B1D17B31485003C09CE /* UIImageView+AFNetworking.m */; };
 		6DEE7B2A17B3156B003C09CE /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2917B3156B003C09CE /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		6DEE7B3117B31589003C09CE /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2C17B31589003C09CE /* arrow.png */; };
-		6DEE7B3217B31589003C09CE /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2D17B31589003C09CE /* arrow@2x.png */; };
-		6DEE7B3317B31589003C09CE /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B2F17B31589003C09CE /* PullToRefreshView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6DEE7B3717B31ABD003C09CE /* JTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B3617B31ABD003C09CE /* JTCell.m */; };
-		6DEE7B3E17B32789003C09CE /* JTNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B3D17B32789003C09CE /* JTNewsDetailViewController.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6DEE7B3E17B32789003C09CE /* JTNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE7B3D17B32789003C09CE /* JTNewsDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D133CD21A01EC6E00BD0FAB /* GMDPTR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDPTR.h; sourceTree = "<group>"; };
+		6D133CD31A01EC6E00BD0FAB /* GMDPTRDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDPTRDefault.h; sourceTree = "<group>"; };
+		6D133CD41A01EC6E00BD0FAB /* GMDPTRDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDPTRDefault.m; sourceTree = "<group>"; };
+		6D133CD51A01EC6E00BD0FAB /* GMDPTRSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDPTRSimple.h; sourceTree = "<group>"; };
+		6D133CD61A01EC6E00BD0FAB /* GMDPTRSimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDPTRSimple.m; sourceTree = "<group>"; };
+		6D133CD71A01EC6E00BD0FAB /* GMDPTRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDPTRView.h; sourceTree = "<group>"; };
+		6D133CD81A01EC6E00BD0FAB /* GMDPTRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDPTRView.m; sourceTree = "<group>"; };
 		6D4391EA19E8D87400D5B6AC /* libLocalyticsAMP_x64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLocalyticsAMP_x64.a; sourceTree = "<group>"; };
 		6D4391EB19E8D87400D5B6AC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6D4391EC19E8D87400D5B6AC /* LocalyticsAmpSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsAmpSession.h; sourceTree = "<group>"; };
@@ -262,10 +269,6 @@
 		6DEE7B1D17B31485003C09CE /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		6DEE7B2817B3156B003C09CE /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		6DEE7B2917B3156B003C09CE /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		6DEE7B2C17B31589003C09CE /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
-		6DEE7B2D17B31589003C09CE /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
-		6DEE7B2E17B31589003C09CE /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
-		6DEE7B2F17B31589003C09CE /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
 		6DEE7B3517B31ABD003C09CE /* JTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCell.h; sourceTree = "<group>"; };
 		6DEE7B3617B31ABD003C09CE /* JTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCell.m; sourceTree = "<group>"; };
 		6DEE7B3C17B32789003C09CE /* JTNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTNewsDetailViewController.h; sourceTree = "<group>"; };
@@ -715,10 +718,13 @@
 		6DEE7B2B17B31579003C09CE /* PullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
-				6DEE7B2C17B31589003C09CE /* arrow.png */,
-				6DEE7B2D17B31589003C09CE /* arrow@2x.png */,
-				6DEE7B2E17B31589003C09CE /* PullToRefreshView.h */,
-				6DEE7B2F17B31589003C09CE /* PullToRefreshView.m */,
+				6D133CD21A01EC6E00BD0FAB /* GMDPTR.h */,
+				6D133CD31A01EC6E00BD0FAB /* GMDPTRDefault.h */,
+				6D133CD41A01EC6E00BD0FAB /* GMDPTRDefault.m */,
+				6D133CD51A01EC6E00BD0FAB /* GMDPTRSimple.h */,
+				6D133CD61A01EC6E00BD0FAB /* GMDPTRSimple.m */,
+				6D133CD71A01EC6E00BD0FAB /* GMDPTRView.h */,
+				6D133CD81A01EC6E00BD0FAB /* GMDPTRView.m */,
 			);
 			name = PullToRefresh;
 			sourceTree = "<group>";
@@ -791,8 +797,6 @@
 				6D980B1D17B167480036368E /* iTunesArtwork@2x.png in Resources */,
 				6D980B2017B167D20036368E /* iTunesArtwork@2x in Resources */,
 				6D980B2117B167D20036368E /* iTunesArtwork in Resources */,
-				6DEE7B3117B31589003C09CE /* arrow.png in Resources */,
-				6DEE7B3217B31589003C09CE /* arrow@2x.png in Resources */,
 				6D556E2517B4CBDD00594DA0 /* Localizable.strings in Resources */,
 				6DE07D6317B847E80022501E /* Settings.bundle in Resources */,
 				6DE79A9017C5C8CD0029EF17 /* drawerIcon.png in Resources */,
@@ -832,10 +836,12 @@
 				6D980A3E17AF3AA20036368E /* UIView+JT.m in Sources */,
 				6D980A4117AF3ACC0036368E /* UIViewController+JT.m in Sources */,
 				6D980A4417AF3B090036368E /* JT.m in Sources */,
+				6D133CDA1A01EC6E00BD0FAB /* GMDPTRSimple.m in Sources */,
 				6D980A4917AF3C1E0036368E /* JTRootTabBarController.m in Sources */,
 				6D980A4D17AF50140036368E /* JTLoadingViewController.m in Sources */,
 				6D980A5117AF50BA0036368E /* JTLoadingImageView.m in Sources */,
 				6D980A9217AF8C9A0036368E /* JTCollectionViewController.m in Sources */,
+				6D133CDB1A01EC6E00BD0FAB /* GMDPTRView.m in Sources */,
 				6D980AE917B07D600036368E /* JTCollection.m in Sources */,
 				6D980AED17B088590036368E /* JTCollectionViewCell.m in Sources */,
 				6D980AF217B0AAC60036368E /* JTDetailViewController.m in Sources */,
@@ -854,6 +860,7 @@
 				6DEE7AFF17B31449003C09CE /* CSSSelectorPart.m in Sources */,
 				6DEE7B0017B31449003C09CE /* DoctypeChunk.m in Sources */,
 				6DEE7B0117B31449003C09CE /* DocumentRoot.m in Sources */,
+				6D133CD91A01EC6E00BD0FAB /* GMDPTRDefault.m in Sources */,
 				6DEE7B0217B31449003C09CE /* Element.m in Sources */,
 				6DEE7B0317B31449003C09CE /* ElementParser.m in Sources */,
 				6DEE7B0417B31449003C09CE /* EntityChunk.m in Sources */,
@@ -872,7 +879,6 @@
 				6DEE7B2517B31485003C09CE /* AFXMLRequestOperation.m in Sources */,
 				6DEE7B2617B31485003C09CE /* UIImageView+AFNetworking.m in Sources */,
 				6DEE7B2A17B3156B003C09CE /* MBProgressHUD.m in Sources */,
-				6DEE7B3317B31589003C09CE /* PullToRefreshView.m in Sources */,
 				6DEE7B3717B31ABD003C09CE /* JTCell.m in Sources */,
 				6DEE7B3E17B32789003C09CE /* JTNewsDetailViewController.m in Sources */,
 				6D556E1817B49C2900594DA0 /* JTBlogViewController.m in Sources */,

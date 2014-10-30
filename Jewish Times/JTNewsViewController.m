@@ -13,7 +13,6 @@
 #import "AFXMLRequestOperation.h"
 #import "AFImageRequestOperation.h"
 #import "MBProgressHUD.h"
-#import "PullToRefreshView.h"
 #import "JTAppDelegate.h"
 #import "JTCell.h"
 #import "JTNewsDetailViewController.h"
@@ -71,6 +70,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	
 	[HUD showWhileExecuting:@selector(loadData) onTarget:self withObject:nil animated:YES];
     
+    self.pullToRefreshView = [[GMDPTRView alloc] initWithScrollView:JTTableView delegate:self];
+    
     NSURL *requestURL = [NSURL URLWithString:NSLocalizedString(@"NEWS",nil)];
     NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest: request
@@ -84,10 +85,6 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	
     UIColor* bgColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_texture.png"]];
     [self.view setBackgroundColor:bgColor];
-    
-    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.JTTableView];
-    [pull setDelegate:self];
-    [self.JTTableView addSubview:pull];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(foregroundRefresh:)
@@ -154,17 +151,20 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)loadData {
-    if (items == nil) {
-        
-        JTParser *rssParser = [[JTParser alloc] init];
-        [rssParser parseRssFeed:NSLocalizedString(@"NEWS",nil) withDelegate:self];
-        
-        [rssParser release];
-    } else {
-        [self.JTTableView reloadData];
-    }
-    sleep(1);
-    [pull finishedLoading];
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_after(popTime, backgroundQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (items == nil) {
+                JTParser *rssParser = [[JTParser alloc] init];
+                [rssParser parseRssFeed:NSLocalizedString(@"NEWS", nil) withDelegate:self];
+                [self.JTTableView reloadData];
+            } else {
+                [self.JTTableView reloadData];
+            }
+        });
+    });
 }
 
 - (void)receivedItems:(NSArray *)theItems {
@@ -277,31 +277,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 {
     JTParser *rssParser = [[JTParser alloc] init];
     [rssParser parseRssFeed:NSLocalizedString(@"NEWS",nil) withDelegate:self];
-}
-
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    if (items == nil) {
-        
-        [self performSelectorInBackground:@selector(loadData) withObject:nil];
-        
-        [self reloadTableData];
-        self.JTTableView.userInteractionEnabled = YES;
-        
-    } else {
-        [self.JTTableView reloadData];
-    }
-    
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-	[self.view addSubview:HUD];
-	
-	HUD.delegate = self;
-	HUD.labelText = @"Loading Jewish Times";
-	
-	[HUD showWhileExecuting:@selector(loadData) onTarget:self withObject:nil animated:YES];
-    
-    
+    [self.JTTableView reloadData];
 }
 
 #pragma mark -
@@ -310,7 +286,6 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 -(void)foregroundRefresh:(NSNotification *)notification
 {
     self.JTTableView.contentOffset = CGPointMake(0, -65);
-    [pull setState:PullToRefreshViewStateLoading];
     [self performSelectorInBackground:@selector(loadData) withObject:nil];
     
     [self reloadTableData];
@@ -357,7 +332,6 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	[formatter release];
 	[itemsToDisplay release];
 	[items release];
-    [pull release];
     [HUD release];
     [_sView release];
     [super dealloc];
@@ -367,5 +341,31 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (void)viewDidUnload {
     [super viewDidUnload];
     
+}
+
+#pragma mark - PTR
+- (BOOL)pullToRefreshViewShouldStartLoading:(GMDPTRView *)view {
+    return YES;
+}
+
+- (void)pullToRefreshViewDidStartLoading:(GMDPTRView *)view {
+    [self refresh];
+}
+
+- (void)pullToRefreshViewDidFinishLoading:(GMDPTRView *)view {
+    
+}
+
+- (void)refresh {
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds *NSEC_PER_SEC);
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_after(popTime, backgroundQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.pullToRefreshView finishLoading];
+            [self reloadTableData];
+            [self.JTTableView reloadData];
+        });
+    });
 }
 @end

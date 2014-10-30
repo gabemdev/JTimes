@@ -121,7 +121,7 @@
     
     [_itemSummary loadHTMLString:HTMLString baseURL:baseURL];
     
-    internetReach = [[Reachability reachabilityForInternetConnection] retain];
+    internetReach = [Reachability reachabilityForInternetConnection];
     [internetReach startNotifier];
     NetworkStatus netStatus = [internetReach currentReachabilityStatus];
     switch (netStatus)
@@ -138,7 +138,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"No 3G/WiFi detected. Some functionality will be limited until a connection is made." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
-            [alert release];
             break;
         }
     }
@@ -241,7 +240,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"No 3G/WiFi detected. Some functionality will be limited until a connection is made." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
-            [alert release];
             break;
         }
     }
@@ -279,7 +277,6 @@
 - (void)actionSheet: (UIActionSheet *) actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         NSString *message = [NSString stringWithFormat:@"Check out:%@. via Jewish Times App",[item objectForKey:@"title"]];
-        NSURL *url = [item objectForKey:@"link"];
         
         if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
         {
@@ -287,7 +284,7 @@
                                                    composeViewControllerForServiceType:SLServiceTypeTwitter];
             [tweetSheet setInitialText:message];
             
-            [tweetSheet addURL:[NSURL URLWithString:url]];
+            [tweetSheet addURL:[NSURL URLWithString:[item objectForKey:@"link"]]];
             [self presentViewController:tweetSheet animated:YES completion:nil];
             
             tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
@@ -367,7 +364,6 @@
             //[composer setMessageBody:[item objectForKey:@"link"] isHTML:YES];
             [composer setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
             [self presentViewController:composer animated:YES completion:nil];
-            [composer release];
         }
         
     }
@@ -380,7 +376,7 @@
     if (result == MFMailComposeResultSent) {
         //HUD
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check.png"]] autorelease];
+        hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check.png"]];
         hud.mode = MBProgressHUDModeCustomView;
         hud.labelText = @"Sent!";
         
@@ -393,19 +389,10 @@
     else if (result == MFMailComposeResultFailed) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Unable to send email" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 }
 
-- (void)dealloc {
-    
-    [super dealloc];
-    [_backBarButton release];
-    [_reloadBarButton release];
-    [_shareBarButton release];
-    [actionSheet_ release];
-}
 
 - (void)showAlert:(NSString *)message
            result:(id)result
@@ -424,7 +411,6 @@
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:alertMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
-    [alert release];
 }
 
 @end

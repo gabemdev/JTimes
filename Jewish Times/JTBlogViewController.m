@@ -13,7 +13,6 @@
 #import "AFXMLRequestOperation.h"
 #import "AFImageRequestOperation.h"
 #import "MBProgressHUD.h"
-#import "PullToRefreshView.h"
 #import "JTAppDelegate.h"
 #import "JTCell.h"
 #import "JTNewsDetailViewController.h"
@@ -65,6 +64,8 @@
     
     [[LocalyticsSession shared] tagEvent:@"Blog News Main"];
     
+    self.pullToRefreshView = [[GMDPTRView alloc] initWithScrollView:self.JTBlogTableView delegate:self];
+    
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[self.navigationController.view addSubview:HUD];
 	
@@ -81,15 +82,11 @@
                                                                                                [XMLParser parse];
                                                                                            } failure:nil];
     
-    NSOperation *queue = [[[NSOperationQueue alloc]init]autorelease];
+    NSOperationQueue *queue = [[[NSOperationQueue alloc]init]autorelease];
     [queue addOperation:operation];
 	
     UIColor* bgColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_texture.png"]];
     [self.view setBackgroundColor:bgColor];
-    
-    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.JTBlogTableView];
-    [pull setDelegate:self];
-    [self.JTBlogTableView addSubview:pull];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(foregroundRefresh:)
@@ -156,17 +153,20 @@
 }
 
 - (void)loadData {
-    if (items == nil) {
-        
-        JTParser *rssParser = [[JTParser alloc] init];
-        [rssParser parseRssFeed:kCDKBlogUrl withDelegate:self];
-        
-        [rssParser release];
-    } else {
-        [self.JTBlogTableView reloadData];
-    }
-    sleep(1);
-    [pull finishedLoading];
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds *NSEC_PER_SEC);
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_after(popTime, backgroundQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (items == nil) {
+                JTParser *rssParser = [[JTParser alloc] init];
+                [rssParser parseRssFeed:kCDKBlogUrl withDelegate:self];
+                [self.JTBlogTableView reloadData];
+            } else {
+                [self.JTBlogTableView reloadData];
+            }
+        });
+    });
 }
 
 - (void)receivedItems:(NSArray *)theItems {
@@ -279,32 +279,9 @@
 {
     JTParser *rssParser = [[JTParser alloc] init];
     [rssParser parseRssFeed:kCDKBlogUrl withDelegate:self];
+    [self.JTBlogTableView reloadData];
 }
 
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    if (items == nil) {
-        
-        [self performSelectorInBackground:@selector(loadData) withObject:nil];
-        
-        [self reloadTableData];
-        self.JTBlogTableView.userInteractionEnabled = YES;
-        
-    } else {
-        [self.JTBlogTableView reloadData];
-    }
-    
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-	[self.view addSubview:HUD];
-	
-	HUD.delegate = self;
-	HUD.labelText = @"Loading Jewish Blog";
-	
-	[HUD showWhileExecuting:@selector(loadData) onTarget:self withObject:nil animated:YES];
-    
-    
-}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -312,7 +289,6 @@
 -(void)foregroundRefresh:(NSNotification *)notification
 {
     self.JTBlogTableView.contentOffset = CGPointMake(0, -65);
-    [pull setState:PullToRefreshViewStateLoading];
     [self performSelectorInBackground:@selector(loadData) withObject:nil];
     
     [self reloadTableData];
@@ -359,7 +335,6 @@
 	[formatter release];
 	[itemsToDisplay release];
 	[items release];
-    [pull release];
     [HUD release];
     [_sView release];
     [super dealloc];
@@ -369,6 +344,32 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
+}
+
+#pragma mark - PTR
+- (BOOL)pullToRefreshViewShouldStartLoading:(GMDPTRView *)view {
+    return YES;
+}
+
+- (void)pullToRefreshViewDidStartLoading:(GMDPTRView *)view {
+    [self refresh];
+}
+
+- (void)pullToRefreshViewDidFinishLoading:(GMDPTRView *)view {
+    
+}
+
+- (void)refresh {
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds *NSEC_PER_SEC);
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_after(popTime, backgroundQueue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.pullToRefreshView finishLoading];
+            [self reloadTableData];
+            [self.JTBlogTableView reloadData];
+        });
+    });
 }
 
 @end

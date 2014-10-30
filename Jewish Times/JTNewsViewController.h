@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PullToRefreshView.h"
 #import "MBProgressHUD.h"
+#import "GMDPTR.h"
 
-@interface JTNewsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, PullToRefreshViewDelegate, MBProgressHUDDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>{
+@interface JTNewsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>{
     
     MBProgressHUD *HUD;
     
@@ -24,8 +24,6 @@
 	NSArray *itemsToDisplay;
 	NSDateFormatter *formatter;
     
-    PullToRefreshView *pull;
-    
     Reachability *internetReach;
     
     IBOutlet UIImageView *postImage;
@@ -35,6 +33,6 @@
 @property (retain, nonatomic) NSArray *items;
 @property (retain, nonatomic) IBOutlet UIImage *postImage;
 @property (retain, nonatomic) IBOutlet UIImageView *sView;
-
+@property (nonatomic, strong) GMDPTRView *pullToRefreshView;
 
 @end
