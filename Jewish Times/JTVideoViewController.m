@@ -49,7 +49,7 @@
     
     self.navigationItem.leftBarButtonItem = backBtn;
     
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.hidesWhenStopped = YES;
     [indicator stopAnimating];
     self.activityIndicator = indicator;
