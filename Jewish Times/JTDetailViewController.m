@@ -172,6 +172,7 @@
             
         };
         activityVC.completionHandler = completionBlock;
+
         }
         
         [self presentViewController:activityVC animated:YES completion:nil];

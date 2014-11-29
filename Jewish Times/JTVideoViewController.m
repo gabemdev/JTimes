@@ -59,12 +59,6 @@
     self.navigationItem.rightBarButtonItem = rightButton;
     //[rightButton release];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval: (0.5)
-                                             target:self
-                                           selector:@selector(loading)
-                                           userInfo:Nil
-                                            repeats:YES];
-    
     internetReach = [Reachability reachabilityForInternetConnection];
     [internetReach startNotifier];
     NetworkStatus netStatus = [internetReach currentReachabilityStatus];
